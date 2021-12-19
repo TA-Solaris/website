@@ -1,0 +1,160 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto Mono', monospace;
+}
+
+body {
+    background-image: url('back.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.navbar{
+    position: absolute;
+    right: 45px;
+    top: 30px;
+}
+.navbar li{
+    list-style: none;
+    margin: 0 40px;
+    display: inline-block;
+    cursor: pointer;
+}
+.navbar li a{
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+}
+.navbar li a::after{
+    content: '';
+    width: 0px;
+    height: 3px;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    transition: width 0.3s;
+}
+.navbar li a:hover::after{
+    width: 50%;
+}
+
+.main_title{
+    position: absolute;
+    top: 30px;
+    left: 45px;
+    color: white;
+}
+.main_image{
+    border-radius: 50%;
+    transform: translate(-250px, 0)
+}
+.main_text{
+    transform: translate(250px, 0)
+}
+.main_text h1{
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    width: 250px;
+    word-wrap: break-word;
+    text-align: center;
+}
+.center h2{
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    width: 500px;
+    word-wrap: break-word;
+    text-align: center;
+}
+.center a{
+    font-size: 30px;
+    font-weight: bold;
+    width: 1000px;
+    word-wrap: normal;
+    text-align: center;
+}
+
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+.icons_box{
+    width: 32px;
+    position: absolute;
+    right: 45px;
+    bottom: 50px;
+    text-align: center;
+}
+.icons_box img{
+    cursor: pointer;
+}
+
+.contact{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+form{
+    width: 90%;
+    max-width: 600px;
+}
+.input_group{
+    margin-bottom: 30px;
+    position: relative;
+}
+input, textarea{
+    width: 100%;
+    padding: 10px;
+    outline: 0;
+    border: 1px solid white;
+    color: white;
+    background: transparent;
+    font-size: 15px;
+    opacity: 1;
+    transition: 0.2s;
+}
+textarea{
+    resize: none;
+}
+label{
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 10px;
+    color: white;
+    cursor: text;
+    transition: 0.2s;
+}
+button{
+    padding: 10px 0;
+    color: white;
+    outline: none;
+    background: transparent;
+    border: 1px solid white;
+    width: 100%;
+    cursor: pointer;
+}
+input:focus~label,
+input:valid~label{
+    top: -35px;
+    font-size: 13px;
+}
+textarea:focus~label,
+textarea:valid~label{
+    opacity: 0;
+}

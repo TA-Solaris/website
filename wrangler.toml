@@ -1,0 +1,4 @@
+name = "website"
+main = "worker.js"
+compatibility_date = "2025-11-06"
+assets = { directory = "./dist" }

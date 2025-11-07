@@ -1,10 +1,17 @@
 import {
   Sidebar,
   SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
   SidebarHeader,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { ModeToggle } from "./mode-toggle";
+import { Home } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export function AppLayout({ children }) {
   return (
@@ -16,8 +23,21 @@ export function AppLayout({ children }) {
           </div>
         </SidebarHeader>
 
-        <SidebarContent className="px-3">
-          {/* TODO */}
+        <SidebarContent>
+          <SidebarGroup>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                <SidebarMenuItem key={"Home"}>
+                  <SidebarMenuButton asChild>
+                    <Link to="/">
+                      <Home />
+                      <span>Home</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
         </SidebarContent>
       </Sidebar>
 

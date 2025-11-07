@@ -10,14 +10,14 @@ function App() {
   return (
     <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
       <SidebarProvider>
-        <AppLayout>
-          <Router>
+        <Router>
+          <AppLayout>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/post/:slug" element={<Post />} />
             </Routes>
-          </Router>
-        </AppLayout>
+          </AppLayout>
+        </Router>
       </SidebarProvider>
     </ThemeProvider>
   )

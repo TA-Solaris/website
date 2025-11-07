@@ -2,6 +2,7 @@ import {
   Sidebar,
   SidebarContent,
   SidebarHeader,
+  SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { ModeToggle } from "./mode-toggle";
 
@@ -21,7 +22,8 @@ export function AppLayout({ children }) {
       </Sidebar>
 
       <div className="flex-1 relative flex flex-col">
-        <header className="sticky top-0 z-50 flex justify-end gap-2 p-3 border-b bg-background/90 backdrop-blur-md">
+        <header className="sticky top-0 z-50 flex justify-between p-3 border-b bg-background/90 backdrop-blur-md">
+          <SidebarTrigger />
           <ModeToggle />
         </header>
 

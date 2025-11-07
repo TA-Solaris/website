@@ -34,7 +34,7 @@ export default function Home() {
       {/* Intro section */}
       <section className="text-center space-y-3">
         <h1 className="text-4xl font-bold tracking-tight">Hi, I’m Edward.</h1>
-        <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+        <p className="text-lg max-w-2xl mx-auto">
           I’m a software developer based in the UK, working in web development.
           This blog is where I share ideas, thoughts, and notes from my projects.
         </p>
@@ -59,7 +59,7 @@ export default function Home() {
                 <CardDescription>{post.date}</CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-700 line-clamp-3">{post.summary}</p>
+                <p className="line-clamp-3">{post.summary}</p>
               </CardContent>
             </Card>
           </Link>

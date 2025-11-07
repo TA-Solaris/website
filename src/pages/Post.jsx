@@ -3,11 +3,18 @@ import { useState, useEffect } from "react";
 import { Separator } from "@/components/ui/separator";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 
 export default function Post() {
   const { slug } = useParams();
   const [post, setPost] = useState(null);
   const [html, setHtml] = useState("");
+  const [progress, setProgress] = useState(13)
+
+  useEffect(() => {
+    const timer = setTimeout(() => setProgress(66), 500)
+    return () => clearTimeout(timer)
+  }, []);
 
   useEffect(() => {
     fetch("/posts.json")
@@ -22,7 +29,7 @@ export default function Post() {
       .then(setHtml);
   }, [slug]);
 
-  if (!post) return <p className="text-center mt-10 text-gray-500">Loading...</p>;
+  if (!post) return <Progress value={progress} />;
 
   return (
     <div className="space-y-6">

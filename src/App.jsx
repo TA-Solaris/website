@@ -1,11 +1,16 @@
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Post from "./pages/Post";
 
 function App() {
 
   return (
-    <>
-      <h1>Edward Potter's Blog</h1>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/post/:slug" element={<Post />} />
+      </Routes>
+    </Router>
   )
 }
 

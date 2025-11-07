@@ -1,0 +1,9 @@
+[
+  {
+    "title": "Hello World",
+    "date": "2025-11-06",
+    "summary": "A description on what this website is about.",
+    "cover": "/posts/images/react-banner.png",
+    "slug": "2025-11-06-hello-world"
+  }
+]

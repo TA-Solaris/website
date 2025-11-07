@@ -30,7 +30,7 @@ export default function Home() {
   }, [page]);
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-10">
+    <div className="space-y-10">
       {/* Intro section */}
       <section className="text-center space-y-3">
         <h1 className="text-4xl font-bold tracking-tight">Hi, I’m Edward.</h1>

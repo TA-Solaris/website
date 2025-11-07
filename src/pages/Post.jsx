@@ -25,7 +25,7 @@ export default function Post() {
   if (!post) return <p className="text-center mt-10 text-gray-500">Loading...</p>;
 
   return (
-    <div className="max-w-3xl mx-auto p-6 space-y-6">
+    <div className="space-y-6">
       {post.cover && (
         <img
           src={post.cover}

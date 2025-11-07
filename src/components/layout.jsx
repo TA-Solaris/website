@@ -20,12 +20,14 @@ export function AppLayout({ children }) {
         </SidebarContent>
       </Sidebar>
 
-      <div className="flex-1 flex flex-col">
-        <header className="flex justify-end gap-2 p-3 border-b">
+      <div className="flex-1 relative flex flex-col">
+        <header className="sticky top-0 z-50 flex justify-end gap-2 p-3 border-b bg-background/90 backdrop-blur-md">
           <ModeToggle />
         </header>
 
-        <main className="flex-1 overflow-y-auto max-w-4xl mx-auto p-6">{children}</main>
+        <main className="flex-1 overflow-y-auto max-w-4xl mx-auto p-6">
+          {children}
+        </main>
       </div>
     </>
   );

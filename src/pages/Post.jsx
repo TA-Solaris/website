@@ -55,7 +55,7 @@ export default function Post() {
       <Separator />
 
       <article
-        className="prose prose-neutral dark:prose-invert max-w-none"
+        className="prose prose-slate dark:prose-invert max-w-none space-y-4"
         dangerouslySetInnerHTML={{ __html: html }}
       />
     </div>

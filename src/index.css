@@ -118,3 +118,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .prose a {
+    @apply text-teal-600 hover:text-teal-500 underline;
+  }
+  .prose ul {
+    list-style-type: disc;
+    margin-left: 1.5em;
+  }
+}

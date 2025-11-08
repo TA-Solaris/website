@@ -5,5 +5,12 @@
     "summary": "A description on what this website is about.",
     "cover": "/posts/images/react-banner.png",
     "slug": "2025-11-06-hello-world"
+  },
+  {
+    "title": "NVF Introduction",
+    "date": "2025-11-08",
+    "summary": "Are you tired of copying your Neovim configuration around? Meet NVF",
+    "cover": "/posts/images/neovim.png",
+    "slug": "2025-11-08-nvf-introduction"
   }
 ]

@@ -10,10 +10,19 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { ModeToggle } from "./mode-toggle";
-import { Home } from "lucide-react";
+import { Home, Newspaper, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
+import {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+} from "@/components/ui/collapsible";
+import { useContext } from "react";
+import { PostsContext } from "@/components/posts-provider";
 
 export function AppLayout({ children }) {
+  const posts = useContext(PostsContext);
+
   return (
     <>
       <Sidebar className="border-r bg-background">
@@ -35,6 +44,29 @@ export function AppLayout({ children }) {
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
+
+                <Collapsible defaultOpen className="group/collapsible">
+                  <CollapsibleTrigger asChild>
+                    <SidebarMenuItem key={"Posts"}>
+                      <SidebarMenuButton>
+                        <Newspaper />
+                        Posts
+                        <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    {posts.map((post) => (
+                      <SidebarMenuItem key={post.slug}>
+                        <SidebarMenuButton asChild>
+                          <Link to={`/post/${post.slug}`}>
+                            <span>{post.title}</span>
+                          </Link>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                    ))}
+                  </CollapsibleContent>
+                </Collapsible>
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>

@@ -1,18 +1,11 @@
-import { useState, useEffect } from "react";
+import { useContext } from "react";
+import { PostsContext } from "@/components/posts-provider";
 import { Link } from "react-router-dom";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    fetch("/posts.json")
-      .then(res => res.json())
-      .then(data => setPosts(
-        data.sort((a, b) => new Date(b.date) - new Date(a.date))
-      ));
-  }, []);
+  const posts = useContext(PostsContext);
 
   return (
     <div className="space-y-10">

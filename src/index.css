@@ -127,4 +127,13 @@
     list-style-type: disc;
     margin-left: 1.5em;
   }
+  .prose h2 {
+    @apply text-2xl font-semibold mt-8 mb-4 border-b border-gray-200 pb-1 scroll-mt-20;
+  }
+  .prose pre {
+    @apply bg-gray-900 text-gray-100 rounded-xl p-4 overflow-x-auto mt-4 mb-6;
+  }
+  .prose code {
+    @apply font-mono text-sm text-teal-300 px-1.5 py-0.5 rounded;
+  }
 }

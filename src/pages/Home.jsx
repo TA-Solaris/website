@@ -5,29 +5,14 @@ import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
-  const [page, setPage] = useState(1);
 
   useEffect(() => {
     fetch("/posts.json")
       .then(res => res.json())
-      .then(data => setPosts(data.slice(0, 10)));
+      .then(data => setPosts(
+        data.sort((a, b) => new Date(b.date) - new Date(a.date))
+      ));
   }, []);
-
-  useEffect(() => {
-    const onScroll = () => {
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
-        setPage((p) => p + 1);
-      }
-    };
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    fetch("/posts.json")
-      .then(res => res.json())
-      .then(data => setPosts(data.slice(0, page * 10)));
-  }, [page]);
 
   return (
     <div className="space-y-10">

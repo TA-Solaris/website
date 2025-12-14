@@ -33,7 +33,7 @@ export default function Home() {
                 />
               )}
               <CardHeader>
-                <CardTitle className="line-clamp-2">{post.title}</CardTitle>
+                <CardTitle className="line-clamp-2 pb-1">{post.title}</CardTitle>
                 <CardDescription>{post.date}</CardDescription>
               </CardHeader>
               <CardContent>

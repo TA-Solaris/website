@@ -1,0 +1,43 @@
+---
+title: "What is going on with the internet?"
+date: "2025-11-23"
+summary: "Is your website down? It might not be your fault"
+cover: "/posts/images/cloudflare-down.png"
+---
+
+Earlier this week (November 18, 2025), Cloudflare had an outage in their bot
+management system which affected a large amount of proxied traffic on that day.
+This meant that for a period of time, this website (hosted on a Cloudflare
+worker), went down.
+
+While the incident was specific to Cloudflare, it reflects a wider pattern that
+has played out repeatedly throughout 2025. This year alone, AWS experienced
+widespread disruption due to failures in DynamoDB and DNS-related control-plane
+components, Google Cloud suffered a multi-service outage triggered by internal
+network configuration issues, and Azure saw global impact from a misdeployment
+in its Front Door routing infrastructure. In each case, the root cause was not
+physical hardware failure, but software, automation, or configuration changes in
+shared systems that sit at the core of these platforms.
+
+![Top 10 Cloud Providers](/posts/images/top-10-cloud-providers.png)
+
+Arguably, this year marks the worst year of downtime for the cloud for at least
+4 years. One can speculate that changes in attitude, AI hallucinations, and
+deprecation of cloud services have aided in growing problems of reliability.
+Engineers should take extra care when navigating this modern age of the
+Internet.
+
+We are seeing a trend of more services being hosted purely on the cloud with no
+fallback or recovery plan. However, issues with these providers can ripple
+outward and take down thousands of otherwise unrelated applications.
+Cloudflare's outage serves as a reminder that no provider is immune to issues,
+and "someone else's infrastructure" can still be a single point of failure. For
+dev-ops and developers, design for failure, assume dependencies will break, and
+think carefully about how much of your system rests on one global platform.
+
+## Future Note
+
+Cloudflare workers went down again before I could get this post out. Here is a
+link to the issue:
+
+[https://www.cloudflarestatus.com/incidents/k9ppxftx8bs5](https://www.cloudflarestatus.com/incidents/k9ppxftx8bs5)

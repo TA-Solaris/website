@@ -12,5 +12,12 @@
     "summary": "Are you tired of copying your Neovim configuration around? Meet NVF",
     "cover": "/posts/images/neovim.png",
     "slug": "2025-11-08-nvf-introduction"
+  },
+  {
+    "title": "What is going on with the internet?",
+    "date": "2025-11-23",
+    "summary": "Is your website down? It might not be your fault",
+    "cover": "/posts/images/cloudflare-down.png",
+    "slug": "2025-11-23-what-is-going-on-with-the-internet"
   }
 ]

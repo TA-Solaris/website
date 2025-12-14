@@ -1,0 +1,70 @@
+<p>Managing your personal or work computer can be surprisingly complicated. Between
+files, applications, and system configurations, recreating an environment from
+scratch can feel like an impossible task. This is where Nix comes in. Nix is a
+powerful package manager and configuration system that makes your setups
+reproducible, declarative, and version-controlled.</p>
+<h2>Understanding the System</h2>
+<p>Think of your system as a triangle with three key components:</p>
+<ul>
+<li>Files</li>
+<li>Applications</li>
+<li>Configuration</li>
+</ul>
+<p>Most backup solutions focus only on your files, leaving applications and
+configurations neglected. An approach used by many developers is to use a Git
+repository to store configuration files and package lists for an easier time
+reinstalling a system. Nix allows for a far more streamlined approach. By
+defining your system declaratively, Nix can handle what other parts would be
+left as a manual process for the user. Additionally, these files can be
+cross-platform and modular, allowing for a more reproducible experience on all
+your machines.</p>
+<p>The Nix project began as a solution to the problem of how to reproduce an entire
+system with all its software and dependencies consistently. Its core principle
+is simple yet powerful. In Nix, every package and dependency is identified by a
+cryptographic hash. This ensures that installing the same package always
+produces the same result, even across different machines.</p>
+<p>The Nix Packages collection (<a href="https://github.com/NixOS/nixpkgs">Nixpkgs</a>)
+contains thousands of pre-defined packages, covering most common software.
+Updates to these packages are tracked in a version-controlled repository.</p>
+<h2>Version Control of the System</h2>
+<p>One of the greatest advantages of Nix is that your system becomes a fully
+version-controlled entity. By storing your configuration files in a Git
+repository, you can roll back to a previous system state keeping you safe from
+upgrade issues.</p>
+<h2>Configuration for Home Directories</h2>
+<p><a href="https://github.com/nix-community/home-manager">Home Manager</a> builds on Nix to
+manage user-specific configuration files in your home directory. Instead of
+manually editing .gitconfig or shell aliases, you declare them in Nix, and they
+are automatically applied. You can even map complex dotfiles without converting
+them fully to Nix. This can be great for first getting started with Nix.</p>
+<h2>Nix Darwin for MacOS</h2>
+<p>For MacOS users, <a href="https://github.com/nix-darwin/nix-darwin">Nix Darwin</a> extends
+Nix’s functionality, allowing you to manage Mac-specific settings. By using Nix
+Darwin, you can bring the same reproducibility to MacOS that Nix provides on
+Linux. It is likely that you will have to design your Nix dotfiles in a future
+proof way to port them over, as much of the Linux desktop configuration will not
+be applicable. Also, many apps (especially ones that use GTK) will not port
+well, so I would recommend using Nix managed <a href="https://brew.sh/">Homebrew</a> for
+GUI apps.</p>
+<h2>Nix Shell</h2>
+<p><a href="https://nixos.wiki/wiki/Development_environment_with_nix-shell">Nix Shell</a>
+allows you to define project-specific environments. This ensures that everyone
+working on a project uses the exact same versions of tools and dependencies.
+This can be done regardless of using a Nix managed system. The only prerequisite
+is that the Nix package manager is installed. Once defined, a new developer can
+simply run a single command and be fully setup.</p>
+<h2>Limitations</h2>
+<p>While Nix is incredibly powerful, there are a couple of limitations in its
+current state.</p>
+<ul>
+<li>Learning curve: Nix has its own language and syntax, which can be intimidating
+at first.</li>
+<li>AI assistance is limited and often produces incorrect options and breaks
+builds (making the previous issue even harder).</li>
+</ul>
+<h2>Final Thoughts</h2>
+<p>If you are interested in getting started with Nix, I recommend the following:</p>
+<ul>
+<li><a href="https://github.com/TA-Solaris/dotfiles-nixos">My Nix Dotfiles</a></li>
+<li><a href="https://potter-ed.net/post/2025-11-08-nvf-introduction">My Previous Post about NVF</a></li>
+</ul>

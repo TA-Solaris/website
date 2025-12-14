@@ -19,5 +19,12 @@
     "summary": "Is your website down? It might not be your fault",
     "cover": "/posts/images/cloudflare-down.png",
     "slug": "2025-11-23-what-is-going-on-with-the-internet"
+  },
+  {
+    "title": "Introduction to Nix",
+    "date": "2025-12-14",
+    "summary": "Write your configuration once and never again",
+    "cover": "/posts/images/nix-banner.png",
+    "slug": "2025-12-14-nix-introduction"
   }
 ]

@@ -26,5 +26,12 @@
     "summary": "Write your configuration once and never again",
     "cover": "/posts/images/nix-banner.png",
     "slug": "2025-12-14-nix-introduction"
+  },
+  {
+    "title": "Deploying with Nix",
+    "date": "2026-03-19",
+    "summary": "Make server management easier with Nix",
+    "cover": "/posts/images/ship-nix-banner.png",
+    "slug": "2026-03-19-deploying-with-nix"
   }
 ]

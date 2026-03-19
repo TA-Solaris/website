@@ -134,7 +134,9 @@
     @apply rounded-lg;
   }
   .prose pre {
-    @apply bg-gray-900 text-gray-100 rounded-xl p-4 overflow-x-auto mt-4 mb-6;
+    @apply bg-gray-900 text-gray-100 rounded-xl p-4 mt-4 mb-6;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
   }
   .prose code {
     @apply font-mono text-sm text-teal-300 px-1.5 py-0.5 rounded;

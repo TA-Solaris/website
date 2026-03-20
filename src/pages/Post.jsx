@@ -10,6 +10,7 @@ export default function Post() {
   const [post, setPost] = useState(null);
   const [html, setHtml] = useState("");
   const [progress, setProgress] = useState(13)
+  const siteTitle = "Edward Potter's Blog";
 
   useEffect(() => {
     const timer = setTimeout(() => setProgress(66), 500)
@@ -28,6 +29,14 @@ export default function Post() {
       .then((res) => res.text())
       .then(setHtml);
   }, [slug]);
+
+  useEffect(() => {
+    if (!post?.title) return;
+    document.title = `${post.title} - ${siteTitle}`;
+    return () => {
+      document.title = siteTitle;
+    };
+  }, [post, siteTitle]);
 
   if (!post) return <Progress value={progress} />;
 
@@ -61,4 +70,3 @@ export default function Post() {
     </div>
   );
 }
-

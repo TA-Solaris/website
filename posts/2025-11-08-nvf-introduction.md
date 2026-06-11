@@ -2,7 +2,7 @@
 title: "NVF Introduction"
 date: "2025-11-08"
 summary: "Are you tired of copying your Neovim configuration around? Meet NVF"
-cover: "/posts/images/neovim.png"
+cover: "/posts/images/neovim.webp"
 ---
 
 I've talked to other software engineers about how they manage their Neovim

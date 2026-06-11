@@ -1,20 +1,34 @@
-import { useParams } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { Separator } from "@/components/ui/separator";
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
+import { Skeleton } from "@/components/ui/skeleton";
+import { PostsContext } from "@/components/posts-context";
 import { applyMarkdownNoticeBlocks } from "@/lib/markdown-notices";
-import {
-  applySyntaxHighlighting,
-  updateCodeBlockActionSpacing,
-} from "@/lib/syntax-highlighting";
+import { fetchPostHtml, preloadImage } from "@/lib/posts";
 
-function applyPostMarkup(html) {
+const siteTitle = "Edward Potter's Blog";
+
+function decorateArticleImages(container) {
+  container.querySelectorAll("img").forEach((image) => {
+    image.setAttribute("loading", "lazy");
+    image.setAttribute("decoding", "async");
+    image.setAttribute("fetchpriority", "auto");
+    image.setAttribute(
+      "sizes",
+      "(min-width: 1024px) 896px, calc(100vw - 3rem)",
+    );
+  });
+}
+
+async function applyPostMarkup(html) {
   const template = document.createElement("template");
   template.innerHTML = html;
 
   applyMarkdownNoticeBlocks(template.content);
+  decorateArticleImages(template.content);
+
+  const { applySyntaxHighlighting } = await import("@/lib/syntax-highlighting");
   applySyntaxHighlighting(template.content);
 
   return template.innerHTML;
@@ -40,30 +54,84 @@ function copyText(text) {
   return Promise.resolve();
 }
 
+function PostSkeleton() {
+  return (
+    <div className="space-y-6">
+      <Skeleton className="aspect-[3/1] w-full rounded-lg" />
+      <header className="space-y-3">
+        <Skeleton className="h-10 w-4/5" />
+        <Skeleton className="h-5 w-28" />
+      </header>
+      <Skeleton className="h-10 w-36" />
+      <Separator />
+      <PostBodySkeleton />
+    </div>
+  );
+}
+
+function PostBodySkeleton() {
+  return (
+    <div className="space-y-4">
+      <Skeleton className="h-5 w-full" />
+      <Skeleton className="h-5 w-11/12" />
+      <Skeleton className="h-5 w-10/12" />
+      <Skeleton className="h-48 w-full rounded-lg" />
+      <Skeleton className="h-5 w-full" />
+      <Skeleton className="h-5 w-9/12" />
+    </div>
+  );
+}
+
 export default function Post() {
   const { slug } = useParams();
   const articleRef = useRef(null);
-  const [post, setPost] = useState(null);
+  const { posts, isLoading: postsLoading } = useContext(PostsContext);
+  const post = useMemo(
+    () => posts.find((item) => item.slug === slug),
+    [posts, slug],
+  );
   const [html, setHtml] = useState("");
-  const [progress, setProgress] = useState(13)
-  const siteTitle = "Edward Potter's Blog";
+  const [isHtmlLoading, setIsHtmlLoading] = useState(true);
+  const [htmlError, setHtmlError] = useState(null);
+  const [isCoverLoaded, setIsCoverLoaded] = useState(!post?.cover);
 
   useEffect(() => {
-    const timer = setTimeout(() => setProgress(66), 500)
-    return () => clearTimeout(timer)
-  }, []);
+    setIsCoverLoaded(!post?.cover);
+
+    if (post?.cover) {
+      preloadImage(post.cover, "high");
+    }
+  }, [post?.cover]);
 
   useEffect(() => {
-    fetch("/posts.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const found = data.find((p) => p.slug === slug);
-        setPost(found);
+    let isActive = true;
+
+    setHtml("");
+    setHtmlError(null);
+    setIsHtmlLoading(true);
+
+    fetchPostHtml(slug)
+      .then(applyPostMarkup)
+      .then((markup) => {
+        if (isActive) {
+          setHtml(markup);
+        }
+      })
+      .catch((error) => {
+        if (!isActive) return;
+
+        console.error("Failed to load post:", error);
+        setHtmlError(error);
+      })
+      .finally(() => {
+        if (isActive) {
+          setIsHtmlLoading(false);
+        }
       });
 
-    fetch(`/posts/${slug}.html`)
-      .then((res) => res.text())
-      .then((markup) => setHtml(applyPostMarkup(markup)));
+    return () => {
+      isActive = false;
+    };
   }, [slug]);
 
   useEffect(() => {
@@ -72,43 +140,69 @@ export default function Post() {
     return () => {
       document.title = siteTitle;
     };
-  }, [post, siteTitle]);
+  }, [post]);
 
   useEffect(() => {
     if (!html || !articleRef.current) return;
 
     const article = articleRef.current;
     let frame = null;
+    let isActive = true;
+    let cleanup = () => {};
 
-    const updateSpacing = () => {
-      if (frame !== null) {
-        window.cancelAnimationFrame(frame);
-      }
+    import("@/lib/syntax-highlighting").then(
+      ({ updateCodeBlockActionSpacing }) => {
+        if (!isActive) return;
 
-      frame = window.requestAnimationFrame(() => {
-        updateCodeBlockActionSpacing(article);
-        frame = null;
-      });
-    };
+        const updateSpacing = () => {
+          if (frame !== null) {
+            window.cancelAnimationFrame(frame);
+          }
 
-    updateSpacing();
-    window.addEventListener("resize", updateSpacing);
+          frame = window.requestAnimationFrame(() => {
+            updateCodeBlockActionSpacing(article);
+            frame = null;
+          });
+        };
 
-    const resizeObserver =
-      "ResizeObserver" in window ? new ResizeObserver(updateSpacing) : null;
-    resizeObserver?.observe(article);
+        updateSpacing();
+        window.addEventListener("resize", updateSpacing);
+
+        const resizeObserver =
+          "ResizeObserver" in window ? new ResizeObserver(updateSpacing) : null;
+        resizeObserver?.observe(article);
+
+        cleanup = () => {
+          if (frame !== null) {
+            window.cancelAnimationFrame(frame);
+          }
+
+          window.removeEventListener("resize", updateSpacing);
+          resizeObserver?.disconnect();
+        };
+      },
+    );
 
     return () => {
-      if (frame !== null) {
-        window.cancelAnimationFrame(frame);
-      }
-
-      window.removeEventListener("resize", updateSpacing);
-      resizeObserver?.disconnect();
+      isActive = false;
+      cleanup();
     };
   }, [html]);
 
-  if (!post) return <Progress value={progress} />;
+  if (postsLoading && !post) {
+    return <PostSkeleton />;
+  }
+
+  if (!post) {
+    return (
+      <div className="space-y-4">
+        <h1 className="text-3xl font-bold">Post not found</h1>
+        <Button asChild variant="outline" className="cursor-pointer">
+          <Link to="/">Back to Home</Link>
+        </Button>
+      </div>
+    );
+  }
 
   function handleArticleClick(event) {
     if (!(event.target instanceof Element)) return;
@@ -138,11 +232,25 @@ export default function Post() {
   return (
     <div className="space-y-6">
       {post.cover && (
-        <img
-          src={post.cover}
-          alt={post.title}
-          className="rounded-lg w-full max-h-[400px] object-cover shadow"
-        />
+        <div className="relative aspect-[3/1] w-full overflow-hidden rounded-lg bg-accent shadow">
+          {!isCoverLoaded && (
+            <Skeleton className="absolute inset-0 rounded-none" />
+          )}
+          <img
+            src={post.cover}
+            alt={post.title}
+            width="1200"
+            height="400"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+            onLoad={() => setIsCoverLoaded(true)}
+            onError={() => setIsCoverLoaded(true)}
+            className={`h-full w-full object-cover object-center transition-opacity duration-300 ${
+              isCoverLoaded ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        </div>
       )}
 
       <header className="space-y-3">
@@ -158,12 +266,22 @@ export default function Post() {
 
       <Separator />
 
-      <article
-        ref={articleRef}
-        className="prose prose-slate dark:prose-invert max-w-none space-y-4"
-        onClick={handleArticleClick}
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
+      {isHtmlLoading && <PostBodySkeleton />}
+
+      {htmlError && (
+        <p className="text-sm text-muted-foreground">
+          This post could not be loaded. Please refresh the page.
+        </p>
+      )}
+
+      {html && (
+        <article
+          ref={articleRef}
+          className="prose prose-slate dark:prose-invert max-w-none space-y-4"
+          onClick={handleArticleClick}
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
+      )}
     </div>
   );
 }

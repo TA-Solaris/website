@@ -2,7 +2,7 @@
 title: "How to fix Jellyfin Orphaned Records"
 date: "2026-06-11"
 summary: "Stale Jellyfin DB? Here is my method for resolving it"
-cover: "/posts/images/jellyfin-fire-banner.png"
+cover: "/posts/images/jellyfin-fire-banner.webp"
 ---
 
 Jellyfin is an amazing piece of software for hosting you home media in a

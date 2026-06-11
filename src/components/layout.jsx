@@ -18,10 +18,10 @@ import {
   CollapsibleContent,
 } from "@/components/ui/collapsible";
 import { useContext } from "react";
-import { PostsContext } from "@/components/posts-provider";
+import { PostsContext } from "@/components/posts-context";
 
 export function AppLayout({ children }) {
-  const posts = useContext(PostsContext);
+  const { posts } = useContext(PostsContext);
 
   return (
     <>

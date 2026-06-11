@@ -1,0 +1,142 @@
+<p>Jellyfin is an amazing piece of software for hosting you home media in a
+convenient way. However, if you've played around with you files after importing
+them to Jellyfin (moved/renamed), then you will have probably stumbled across a
+similar issue to me. Jellyfin treats the database as the source of truth, not
+the files. This can lead to files becoming orphaned.</p>
+<p>My chosen method to resolve this is to clear out the orphaned records. You can
+also try to repair the paths, but I am not sure how successful this would be.
+The following is about my method.</p>
+<blockquote>
+<p>[!WARNING]
+I am running Jellyfin version 10.11.8 through Docker. Your database may be
+different to mine. Check everything before running. Best case scenario, you
+will lose your state to the cleared items (watchstate etc.). It is not
+advisable to be editing the database manually, you can destroy your
+installation. These are the risks involved with doing this.</p>
+</blockquote>
+<h2>The Method</h2>
+<p>The first step is to spin down the app completely. It is very unwise to edit the
+DB with the app running. At this point, install sqlite. As I am using nix on my
+server this is as easy as typing the following command:</p>
+<pre><code class="language-sh">nix-shell -p sqlite
+</code></pre>
+<p>Then we want to enter the database and clear the target entries. Make sure you
+make a backup before.</p>
+<pre><code class="language-sh">cp /path/to/appdir/jellyfin.db /path/to/appdir/jellyfin.db.bak
+sqlite3 /path/to/appdir/jellyfin.db
+SELECT Path FROM BaseItems WHERE Path LIKE '/path/to/datadir/Movies/[movie title]%';
+DELETE FROM BaseItems WHERE Path LIKE '/path/to/datadir/Movies/[movie title]%';
+</code></pre>
+<p>After this the BaseItem record will no longer exist. I use a script to clear up
+the orphaned related entities from this. I take no responsibility if you run
+this script, test it before using it.</p>
+<pre><code class="language-sql">BEGIN IMMEDIATE;
+
+  DELETE FROM UserData
+  WHERE ItemId IS NOT NULL
+    AND trim(ItemId) &#x3C;> ''
+    AND NOT EXISTS (
+      SELECT 1 FROM BaseItems
+      WHERE BaseItems.Id = UserData.ItemId
+    );
+
+  DELETE FROM TrickplayInfos
+  WHERE NOT EXISTS (
+    SELECT 1 FROM BaseItems
+    WHERE BaseItems.Id = TrickplayInfos.ItemId
+  );
+
+  DELETE FROM PeopleBaseItemMap
+  WHERE NOT EXISTS (
+    SELECT 1 FROM BaseItems
+    WHERE BaseItems.Id = PeopleBaseItemMap.ItemId
+  );
+
+  DELETE FROM MediaStreamInfos
+  WHERE NOT EXISTS (
+    SELECT 1 FROM BaseItems
+    WHERE BaseItems.Id = MediaStreamInfos.ItemId
+  );
+
+  DELETE FROM MediaSegments
+  WHERE NOT EXISTS (
+    SELECT 1 FROM BaseItems
+    WHERE BaseItems.Id = MediaSegments.ItemId
+  );
+
+  DELETE FROM KeyframeData
+  WHERE NOT EXISTS (
+    SELECT 1 FROM BaseItems
+    WHERE BaseItems.Id = KeyframeData.ItemId
+  );
+
+  DELETE FROM ItemValuesMap
+  WHERE NOT EXISTS (
+    SELECT 1 FROM BaseItems
+    WHERE BaseItems.Id = ItemValuesMap.ItemId
+  );
+
+  DELETE FROM Chapters
+  WHERE NOT EXISTS (
+    SELECT 1 FROM BaseItems
+    WHERE BaseItems.Id = Chapters.ItemId
+  );
+
+  DELETE FROM BaseItemProviders
+  WHERE NOT EXISTS (
+    SELECT 1 FROM BaseItems
+    WHERE BaseItems.Id = BaseItemProviders.ItemId
+  );
+
+  DELETE FROM BaseItemImageInfos
+  WHERE NOT EXISTS (
+    SELECT 1 FROM BaseItems
+    WHERE BaseItems.Id = BaseItemImageInfos.ItemId
+  );
+
+  DELETE FROM AttachmentStreamInfos
+  WHERE NOT EXISTS (
+    SELECT 1 FROM BaseItems
+    WHERE BaseItems.Id = AttachmentStreamInfos.ItemId
+  );
+
+  DELETE FROM AncestorIds
+  WHERE NOT EXISTS (
+      SELECT 1 FROM BaseItems
+      WHERE BaseItems.Id = AncestorIds.ItemId
+    )
+     OR NOT EXISTS (
+      SELECT 1 FROM BaseItems
+      WHERE BaseItems.Id = AncestorIds.ParentItemId
+    );
+
+  DELETE FROM ActivityLogs
+  WHERE ItemId IS NOT NULL
+    AND trim(ItemId) &#x3C;> ''
+    AND NOT EXISTS (
+      SELECT 1 FROM BaseItems
+      WHERE BaseItems.Id = ActivityLogs.ItemId
+    );
+
+  DELETE FROM Peoples
+  WHERE NOT EXISTS (
+    SELECT 1 FROM PeopleBaseItemMap
+    WHERE PeopleBaseItemMap.PeopleId = Peoples.Id
+  );
+
+  DELETE FROM ItemValues
+  WHERE NOT EXISTS (
+    SELECT 1 FROM ItemValuesMap
+    WHERE ItemValuesMap.ItemValueId = ItemValues.ItemValueId
+  );
+
+  COMMIT;
+
+  VACUUM;
+</code></pre>
+<p>Write these contents to a well named file (such as <code>script.sql</code> 😉). After this
+run the script:</p>
+<pre><code class="language-sh">sqlite3 /path/to/appdir/jellyfin.db &#x3C; script.sql
+</code></pre>
+<p>After this, you should be able to spin up the app and rescan the library to get
+the media item back.</p>

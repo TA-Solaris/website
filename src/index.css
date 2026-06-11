@@ -260,6 +260,43 @@
     font-size: 0.875rem;
     line-height: 1.7;
   }
+  .prose pre .hljs-comment,
+  .prose pre .hljs-quote {
+    color: rgb(148 163 184);
+    font-style: italic;
+  }
+  .prose pre .hljs-keyword,
+  .prose pre .hljs-selector-tag,
+  .prose pre .hljs-subst {
+    color: rgb(216 180 254);
+    font-weight: 700;
+  }
+  .prose pre .hljs-string,
+  .prose pre .hljs-regexp {
+    color: rgb(134 239 172);
+  }
+  .prose pre .hljs-number,
+  .prose pre .hljs-literal {
+    color: rgb(253 186 116);
+  }
+  .prose pre .hljs-title,
+  .prose pre .hljs-title.function_,
+  .prose pre .hljs-built_in {
+    color: rgb(103 232 249);
+  }
+  .prose pre .hljs-variable,
+  .prose pre .hljs-template-variable {
+    color: rgb(249 168 212);
+  }
+  .prose pre .hljs-attr,
+  .prose pre .hljs-attribute,
+  .prose pre .hljs-property {
+    color: rgb(147 197 253);
+  }
+  .prose pre .hljs-operator,
+  .prose pre .hljs-punctuation {
+    color: rgb(226 232 240);
+  }
   .prose pre:has(> code[class*="language-"])::before {
     content: "CODE";
     position: absolute;

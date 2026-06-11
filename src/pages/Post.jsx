@@ -4,47 +4,15 @@ import { Separator } from "@/components/ui/separator";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { applyMarkdownNoticeBlocks } from "@/lib/markdown-notices";
+import { applySyntaxHighlighting } from "@/lib/syntax-highlighting";
 
-const noticeLabels = {
-  note: "Note",
-  tip: "Tip",
-  important: "Important",
-  warning: "Warning",
-  caution: "Caution",
-};
-
-function applyNoticeBlockMarkup(html) {
+function applyPostMarkup(html) {
   const template = document.createElement("template");
   template.innerHTML = html;
 
-  template.content.querySelectorAll("blockquote").forEach((blockquote) => {
-    const firstParagraph = blockquote.firstElementChild;
-    const firstText = firstParagraph?.firstChild;
-
-    if (firstParagraph?.tagName !== "P" || firstText?.nodeType !== 3) {
-      return;
-    }
-
-    const marker = firstText.nodeValue.match(
-      /^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\][\t ]*(?:\r?\n)?/i,
-    );
-
-    if (!marker) return;
-
-    const type = marker[1].toLowerCase();
-    firstText.nodeValue = firstText.nodeValue.slice(marker[0].length);
-
-    if (!firstParagraph.textContent.trim()) {
-      firstParagraph.remove();
-    }
-
-    const title = document.createElement("p");
-    title.className = "notice-title";
-    title.textContent = noticeLabels[type];
-
-    blockquote.classList.add("notice", `notice-${type}`);
-    blockquote.prepend(title);
-  });
+  applyMarkdownNoticeBlocks(template.content);
+  applySyntaxHighlighting(template.content);
 
   return template.innerHTML;
 }
@@ -71,7 +39,7 @@ export default function Post() {
 
     fetch(`/posts/${slug}.html`)
       .then((res) => res.text())
-      .then((markup) => setHtml(applyNoticeBlockMarkup(markup)));
+      .then((markup) => setHtml(applyPostMarkup(markup)));
   }, [slug]);
 
   useEffect(() => {

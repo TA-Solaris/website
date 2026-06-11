@@ -2,7 +2,7 @@
 title: "What is going on with the internet?"
 date: "2025-11-23"
 summary: "Is your website down? It might not be your fault"
-cover: "/posts/images/cloudflare-down.png"
+cover: "/posts/images/cloudflare-down.webp"
 ---
 
 Earlier this week (November 18, 2025), Cloudflare had an outage in their bot
@@ -19,7 +19,7 @@ in its Front Door routing infrastructure. In each case, the root cause was not
 physical hardware failure, but software, automation, or configuration changes in
 shared systems that sit at the core of these platforms.
 
-![Top 10 Cloud Providers](/posts/images/top-10-cloud-providers.png)
+![Top 10 Cloud Providers](/posts/images/top-10-cloud-providers.webp)
 
 Arguably, this year marks the worst year of downtime for the cloud for at least
 4 years. One can speculate that changes in attitude, AI hallucinations, and

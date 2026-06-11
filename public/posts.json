@@ -3,35 +3,42 @@
     "title": "Hello World",
     "date": "2025-11-06",
     "summary": "A description on what this website is about.",
-    "cover": "/posts/images/react-banner.png",
+    "cover": "/posts/images/react-banner.webp",
     "slug": "2025-11-06-hello-world"
   },
   {
     "title": "NVF Introduction",
     "date": "2025-11-08",
     "summary": "Are you tired of copying your Neovim configuration around? Meet NVF",
-    "cover": "/posts/images/neovim.png",
+    "cover": "/posts/images/neovim.webp",
     "slug": "2025-11-08-nvf-introduction"
   },
   {
     "title": "What is going on with the internet?",
     "date": "2025-11-23",
     "summary": "Is your website down? It might not be your fault",
-    "cover": "/posts/images/cloudflare-down.png",
+    "cover": "/posts/images/cloudflare-down.webp",
     "slug": "2025-11-23-what-is-going-on-with-the-internet"
   },
   {
     "title": "Introduction to Nix",
     "date": "2025-12-14",
     "summary": "Write your configuration once and never again",
-    "cover": "/posts/images/nix-banner.png",
+    "cover": "/posts/images/nix-banner.webp",
     "slug": "2025-12-14-nix-introduction"
   },
   {
     "title": "Deploying with Nix",
     "date": "2026-03-19",
     "summary": "Make server management easier with Nix",
-    "cover": "/posts/images/ship-nix-banner.png",
+    "cover": "/posts/images/ship-nix-banner.webp",
     "slug": "2026-03-19-deploying-with-nix"
+  },
+  {
+    "title": "How to fix Jellyfin Orphaned Records",
+    "date": "2026-06-11",
+    "summary": "Stale Jellyfin DB? Here is my method for resolving it",
+    "cover": "/posts/images/jellyfin-fire-banner.webp",
+    "slug": "2026-06-11-how-to-fix-jellyfin-orphaned-records"
   }
 ]

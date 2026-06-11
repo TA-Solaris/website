@@ -38,6 +38,9 @@ make a backup before.
 ```sh
 cp /path/to/appdir/jellyfin.db /path/to/appdir/jellyfin.db.bak
 sqlite3 /path/to/appdir/jellyfin.db
+```
+
+```sql
 SELECT Path FROM BaseItems WHERE Path LIKE '/path/to/datadir/Movies/[movie title]%';
 DELETE FROM BaseItems WHERE Path LIKE '/path/to/datadir/Movies/[movie title]%';
 ```

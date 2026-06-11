@@ -24,7 +24,8 @@ server this is as easy as typing the following command:</p>
 make a backup before.</p>
 <pre><code class="language-sh">cp /path/to/appdir/jellyfin.db /path/to/appdir/jellyfin.db.bak
 sqlite3 /path/to/appdir/jellyfin.db
-SELECT Path FROM BaseItems WHERE Path LIKE '/path/to/datadir/Movies/[movie title]%';
+</code></pre>
+<pre><code class="language-sql">SELECT Path FROM BaseItems WHERE Path LIKE '/path/to/datadir/Movies/[movie title]%';
 DELETE FROM BaseItems WHERE Path LIKE '/path/to/datadir/Movies/[movie title]%';
 </code></pre>
 <p>After this the BaseItem record will no longer exist. I use a script to clear up

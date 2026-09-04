@@ -1,4 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { PostsContext } from "@/components/posts-context";
 import { PostCard, PostCardSkeleton } from "@/components/post-cards";
 import { Button } from "@/components/ui/button";
@@ -9,18 +10,24 @@ const pageSize = 5;
 
 export default function Posts() {
   const { posts, tagCounts, isLoading, error } = useContext(PostsContext);
-  const [selectedTags, setSelectedTags] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const selectedTags = [...new Set(searchParams.getAll("tag"))].filter((tag) =>
+    Object.hasOwn(tagCounts, tag),
+  );
   const [visibleCount, setVisibleCount] = useState(pageSize);
   const loadMoreRef = useRef(null);
   const filteredPosts = filterPosts(posts, selectedTags);
   const hasMore = visibleCount < filteredPosts.length;
 
   function toggleTag(tag) {
-    setSelectedTags((selected) =>
-      selected.includes(tag)
-        ? selected.filter((item) => item !== tag)
-        : [...selected, tag],
-    );
+    const next = new URLSearchParams(searchParams);
+    const tags = selectedTags.includes(tag)
+      ? selectedTags.filter((item) => item !== tag)
+      : [...selectedTags, tag];
+
+    next.delete("tag");
+    tags.forEach((item) => next.append("tag", item));
+    setSearchParams(next);
     setVisibleCount(pageSize);
   }
 

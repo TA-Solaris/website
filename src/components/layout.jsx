@@ -4,24 +4,24 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarMenu,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarHeader,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { ModeToggle } from "./mode-toggle";
-import { Home, Newspaper, ChevronDown } from "lucide-react";
-import { Link } from "react-router-dom";
-import {
-  Collapsible,
-  CollapsibleTrigger,
-  CollapsibleContent,
-} from "@/components/ui/collapsible";
-import { useContext } from "react";
+import { Home, Newspaper } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { useContext, useState } from "react";
 import { PostsContext } from "@/components/posts-context";
 
 export function AppLayout({ children }) {
   const { posts } = useContext(PostsContext);
+  const { pathname } = useLocation();
+  const [visiblePostCount, setVisiblePostCount] = useState(5);
 
   return (
     <>
@@ -45,28 +45,43 @@ export function AppLayout({ children }) {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
 
-                <Collapsible defaultOpen className="group/collapsible">
-                  <CollapsibleTrigger asChild>
-                    <SidebarMenuItem key={"Posts"}>
-                      <SidebarMenuButton>
-                        <Newspaper />
-                        Posts
-                        <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  </CollapsibleTrigger>
-                  <CollapsibleContent>
-                    {posts.map((post) => (
-                      <SidebarMenuItem key={post.slug}>
-                        <SidebarMenuButton asChild>
+                <SidebarMenuItem key={"Posts"}>
+                  <SidebarMenuButton asChild>
+                    <Link to="/posts">
+                      <Newspaper />
+                      <span>Posts</span>
+                    </Link>
+                  </SidebarMenuButton>
+                  <SidebarMenuSub>
+                    {posts.slice(0, visiblePostCount).map((post) => (
+                      <SidebarMenuSubItem key={post.slug}>
+                        <SidebarMenuSubButton asChild>
                           <Link to={`/post/${post.slug}`}>
                             <span>{post.title}</span>
                           </Link>
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
                     ))}
-                  </CollapsibleContent>
-                </Collapsible>
+                    {visiblePostCount < posts.length && (
+                      <SidebarMenuSubItem>
+                        <SidebarMenuSubButton
+                          asChild
+                          className="w-full cursor-pointer"
+                        >
+                          <button
+                            type="button"
+                            aria-label="Show 5 more posts"
+                            onClick={() =>
+                              setVisiblePostCount((count) => count + 5)
+                            }
+                          >
+                            …
+                          </button>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                    )}
+                  </SidebarMenuSub>
+                </SidebarMenuItem>
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
@@ -79,7 +94,11 @@ export function AppLayout({ children }) {
           <ModeToggle />
         </header>
 
-        <main className="flex-1 overflow-y-auto max-w-4xl mx-auto p-6">
+        <main
+          className={`flex flex-1 w-full flex-col overflow-y-auto p-6 mx-auto ${
+            pathname === "/posts" ? "max-w-none" : "max-w-4xl"
+          }`}
+        >
           {children}
         </main>
       </div>

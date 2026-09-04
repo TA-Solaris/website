@@ -198,7 +198,7 @@ export default function Post() {
       <div className="space-y-4">
         <h1 className="text-3xl font-bold">Post not found</h1>
         <Button asChild variant="outline" className="cursor-pointer">
-          <Link to="/">Back to Home</Link>
+          <Link to="/posts">Back to Posts</Link>
         </Button>
       </div>
     );
@@ -260,7 +260,7 @@ export default function Post() {
 
       <div className="mb-2">
         <Button asChild variant="outline" className="cursor-pointer">
-          <Link to="/">← Back to Home</Link>
+          <Link to="/posts">← Back to Posts</Link>
         </Button>
       </div>
 

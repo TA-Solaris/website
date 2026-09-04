@@ -8,6 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 const Home = lazy(() => import("./pages/Home"));
 const Post = lazy(() => import("./pages/Post"));
+const Posts = lazy(() => import("./pages/Posts"));
 
 function RouteSkeleton() {
   return (
@@ -34,6 +35,7 @@ function App() {
               <Suspense fallback={<RouteSkeleton />}>
                 <Routes>
                   <Route path="/" element={<Home />} />
+                  <Route path="/posts" element={<Posts />} />
                   <Route path="/post/:slug" element={<Post />} />
                 </Routes>
               </Suspense>

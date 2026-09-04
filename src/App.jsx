@@ -16,7 +16,7 @@ function RouteSkeleton() {
       <Skeleton className="h-10 w-2/3" />
       <Skeleton className="h-5 w-full" />
       <Skeleton className="h-5 w-5/6" />
-      <div className="grid gap-6 sm:grid-cols-2">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(min(20rem,100%),1fr))] gap-6">
         <Skeleton className="h-72 w-full rounded-lg" />
         <Skeleton className="h-72 w-full rounded-lg" />
       </div>

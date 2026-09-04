@@ -29,9 +29,9 @@ export default function Posts() {
     <div className="space-y-8">
       <h1 className="text-4xl font-bold tracking-tight">Posts</h1>
 
-      <section className="grid grid-cols-[repeat(auto-fit,minmax(min(20rem,100%),1fr))] gap-6">
+      <section className="grid grid-cols-[repeat(auto-fill,minmax(min(20rem,100%),1fr))] gap-6">
         {isLoading &&
-          Array.from({ length: 6 }).map((_, index) => (
+          Array.from({ length: pageSize }).map((_, index) => (
             <PostCardSkeleton key={index} />
           ))}
 

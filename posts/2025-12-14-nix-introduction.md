@@ -3,6 +3,7 @@ title: "Introduction to Nix"
 date: "2025-12-14"
 summary: "Write your configuration once and never again"
 cover: "/posts/images/nix-banner.webp"
+tags: [nix, coding, open-source]
 ---
 
 Managing your personal or work computer can be surprisingly complicated. Between

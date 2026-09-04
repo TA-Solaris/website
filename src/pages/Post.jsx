@@ -256,6 +256,18 @@ export default function Post() {
       <header className="space-y-3">
         <h1 className="text-4xl font-bold leading-tight">{post.title}</h1>
         <p className="text-gray-500">{post.date}</p>
+        {post.tags.length > 0 && (
+          <div className="flex flex-wrap gap-2" aria-label="Tags">
+            {post.tags.map((tag) => (
+              <span
+                className="rounded-full border bg-accent px-2.5 py-1 text-sm"
+                key={tag}
+              >
+                #{tag}
+              </span>
+            ))}
+          </div>
+        )}
       </header>
 
       <div className="mb-2">

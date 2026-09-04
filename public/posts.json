@@ -1,51 +1,90 @@
-[
-  {
-    "title": "Hello World",
-    "date": "2025-11-06",
-    "summary": "A description on what this website is about.",
-    "cover": "/posts/images/react-banner.webp",
-    "slug": "2025-11-06-hello-world"
-  },
-  {
-    "title": "NVF Introduction",
-    "date": "2025-11-08",
-    "summary": "Are you tired of copying your Neovim configuration around? Meet NVF",
-    "cover": "/posts/images/neovim.webp",
-    "slug": "2025-11-08-nvf-introduction"
-  },
-  {
-    "title": "What is going on with the internet?",
-    "date": "2025-11-23",
-    "summary": "Is your website down? It might not be your fault",
-    "cover": "/posts/images/cloudflare-down.webp",
-    "slug": "2025-11-23-what-is-going-on-with-the-internet"
-  },
-  {
-    "title": "Introduction to Nix",
-    "date": "2025-12-14",
-    "summary": "Write your configuration once and never again",
-    "cover": "/posts/images/nix-banner.webp",
-    "slug": "2025-12-14-nix-introduction"
-  },
-  {
-    "title": "Deploying with Nix",
-    "date": "2026-03-19",
-    "summary": "Make server management easier with Nix",
-    "cover": "/posts/images/ship-nix-banner.webp",
-    "slug": "2026-03-19-deploying-with-nix"
-  },
-  {
-    "title": "How to fix Jellyfin Orphaned Records",
-    "date": "2026-06-11",
-    "summary": "Stale Jellyfin DB? Here is my method for resolving it",
-    "cover": "/posts/images/jellyfin-fire-banner.webp",
-    "slug": "2026-06-11-how-to-fix-jellyfin-orphaned-records"
-  },
-  {
-    "title": "Support Open Source",
-    "date": "2026-09-04",
-    "summary": "Put your server resources to good use",
-    "cover": "/posts/images/penguin-banner.webp",
-    "slug": "2026-09-04-support-open-source"
+{
+  "posts": [
+    {
+      "title": "Hello World",
+      "date": "2025-11-06",
+      "summary": "A description on what this website is about.",
+      "cover": "/posts/images/react-banner.webp",
+      "tags": [
+        "coding"
+      ],
+      "slug": "2025-11-06-hello-world"
+    },
+    {
+      "title": "NVF Introduction",
+      "date": "2025-11-08",
+      "summary": "Are you tired of copying your Neovim configuration around? Meet NVF",
+      "cover": "/posts/images/neovim.webp",
+      "tags": [
+        "nix",
+        "coding",
+        "open-source"
+      ],
+      "slug": "2025-11-08-nvf-introduction"
+    },
+    {
+      "title": "What is going on with the internet?",
+      "date": "2025-11-23",
+      "summary": "Is your website down? It might not be your fault",
+      "cover": "/posts/images/cloudflare-down.webp",
+      "tags": [
+        "commentary"
+      ],
+      "slug": "2025-11-23-what-is-going-on-with-the-internet"
+    },
+    {
+      "title": "Introduction to Nix",
+      "date": "2025-12-14",
+      "summary": "Write your configuration once and never again",
+      "cover": "/posts/images/nix-banner.webp",
+      "tags": [
+        "nix",
+        "coding",
+        "open-source"
+      ],
+      "slug": "2025-12-14-nix-introduction"
+    },
+    {
+      "title": "Deploying with Nix",
+      "date": "2026-03-19",
+      "summary": "Make server management easier with Nix",
+      "cover": "/posts/images/ship-nix-banner.webp",
+      "tags": [
+        "homelab",
+        "nix",
+        "coding",
+        "open-source"
+      ],
+      "slug": "2026-03-19-deploying-with-nix"
+    },
+    {
+      "title": "How to fix Jellyfin Orphaned Records",
+      "date": "2026-06-11",
+      "summary": "Stale Jellyfin DB? Here is my method for resolving it",
+      "cover": "/posts/images/jellyfin-fire-banner.webp",
+      "tags": [
+        "homelab",
+        "open-source"
+      ],
+      "slug": "2026-06-11-how-to-fix-jellyfin-orphaned-records"
+    },
+    {
+      "title": "Support Open Source",
+      "date": "2026-09-04",
+      "summary": "Put your server resources to good use",
+      "cover": "/posts/images/penguin-banner.webp",
+      "tags": [
+        "homelab",
+        "open-source"
+      ],
+      "slug": "2026-09-04-support-open-source"
+    }
+  ],
+  "tagCounts": {
+    "coding": 4,
+    "commentary": 1,
+    "homelab": 3,
+    "nix": 3,
+    "open-source": 5
   }
-]
+}

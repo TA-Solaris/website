@@ -3,6 +3,7 @@ title: "Deploying with Nix"
 date: "2026-03-19"
 summary: "Make server management easier with Nix"
 cover: "/posts/images/ship-nix-banner.webp"
+tags: [homelab, nix, coding, open-source]
 ---
 
 I'm back again, this time with even more experience using

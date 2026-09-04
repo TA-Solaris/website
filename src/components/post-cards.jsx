@@ -30,7 +30,7 @@ export function PostCard({ post, index }) {
       onMouseEnter={() => warmPost(post)}
       onTouchStart={() => warmPost(post)}
     >
-      <Card className="transition-all hover:shadow-lg hover:scale-[1.01] pt-0 overflow-hidden">
+      <Card className="gap-3 overflow-hidden pt-0 transition-all hover:scale-[1.01] hover:shadow-lg">
         {post.cover && (
           <div className="relative h-48 w-full overflow-hidden bg-accent">
             {!isCoverLoaded && (
@@ -52,8 +52,8 @@ export function PostCard({ post, index }) {
             />
           </div>
         )}
-        <CardHeader>
-          <CardTitle className="line-clamp-2 pb-1">{post.title}</CardTitle>
+        <CardHeader className="gap-1">
+          <CardTitle className="line-clamp-2 leading-snug">{post.title}</CardTitle>
           <CardDescription>{post.date}</CardDescription>
         </CardHeader>
         <CardContent>
@@ -66,9 +66,9 @@ export function PostCard({ post, index }) {
 
 export function PostCardSkeleton() {
   return (
-    <Card className="pt-0 overflow-hidden">
+    <Card className="gap-3 overflow-hidden pt-0">
       <Skeleton className="h-48 w-full rounded-none" />
-      <CardHeader>
+      <CardHeader className="gap-1">
         <Skeleton className="h-6 w-3/4" />
         <Skeleton className="h-4 w-24" />
       </CardHeader>

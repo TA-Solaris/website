@@ -4,6 +4,7 @@ import { fetchPosts, warmPostAssets } from "@/lib/posts";
 
 export function PostsProvider({ children }) {
   const [posts, setPosts] = useState([]);
+  const [tagCounts, setTagCounts] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -15,9 +16,10 @@ export function PostsProvider({ children }) {
       .then((data) => {
         if (!isMounted) return;
 
-        setPosts(data);
+        setPosts(data.posts);
+        setTagCounts(data.tagCounts);
         setError(null);
-        cancelWarmup = warmPostAssets(data);
+        cancelWarmup = warmPostAssets(data.posts);
       })
       .catch((err) => {
         if (!isMounted) return;
@@ -38,7 +40,7 @@ export function PostsProvider({ children }) {
   }, []);
 
   return (
-    <PostsContext.Provider value={{ posts, isLoading, error }}>
+    <PostsContext.Provider value={{ posts, tagCounts, isLoading, error }}>
       {children}
     </PostsContext.Provider>
   );

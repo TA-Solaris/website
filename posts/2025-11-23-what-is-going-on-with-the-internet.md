@@ -3,6 +3,7 @@ title: "What is going on with the internet?"
 date: "2025-11-23"
 summary: "Is your website down? It might not be your fault"
 cover: "/posts/images/cloudflare-down.webp"
+tags: [commentary]
 ---
 
 Earlier this week (November 18, 2025), Cloudflare had an outage in their bot

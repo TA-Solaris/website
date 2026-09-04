@@ -3,6 +3,7 @@ title: "Hello World"
 date: "2025-11-06"
 summary: "A description on what this website is about."
 cover: "/posts/images/react-banner.webp"
+tags: [coding]
 ---
 
 Welcome to my personal blog website. The objective of this website was to be

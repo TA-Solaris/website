@@ -21,7 +21,7 @@ export function fetchPosts() {
     postsPromise = fetch(postsUrl)
       .then(assertOk)
       .then((response) => response.json())
-      .then(sortPosts)
+      .then(({ posts, tagCounts }) => ({ posts: sortPosts(posts), tagCounts }))
       .catch((error) => {
         postsPromise = null;
         throw error;

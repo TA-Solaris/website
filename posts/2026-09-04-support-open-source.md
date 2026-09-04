@@ -3,6 +3,7 @@ title: "Support Open Source"
 date: "2026-09-04"
 summary: "Put your server resources to good use"
 cover: "/posts/images/penguin-banner.webp"
+tags: [homelab, open-source]
 ---
 
 Open source software makes up a significant part of the infrastructure I use

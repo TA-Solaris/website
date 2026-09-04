@@ -88,7 +88,7 @@ export function AppLayout({ children }) {
         </SidebarContent>
       </Sidebar>
 
-      <div className="flex-1 relative flex flex-col">
+      <div className="relative flex min-w-0 flex-1 flex-col">
         <header className="sticky top-0 z-50 flex justify-between p-3 border-b bg-background/90 backdrop-blur-md">
           <SidebarTrigger />
           <ModeToggle />

@@ -131,7 +131,7 @@
     @apply text-2xl font-semibold mt-8 mb-4 border-b border-gray-200 pb-1 scroll-mt-20;
   }
   .prose img {
-    @apply rounded-lg;
+    @apply w-full rounded-lg;
   }
   .prose .notice {
     --notice-bg: oklch(0.97 0.013 255.508);

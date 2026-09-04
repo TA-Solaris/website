@@ -40,5 +40,12 @@
     "summary": "Stale Jellyfin DB? Here is my method for resolving it",
     "cover": "/posts/images/jellyfin-fire-banner.webp",
     "slug": "2026-06-11-how-to-fix-jellyfin-orphaned-records"
+  },
+  {
+    "title": "Support Open Source",
+    "date": "2026-09-04",
+    "summary": "Put your server resources to good use",
+    "cover": "/posts/images/penguin-banner.webp",
+    "slug": "2026-09-04-support-open-source"
   }
 ]

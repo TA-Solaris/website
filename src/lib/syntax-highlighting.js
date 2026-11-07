@@ -3,11 +3,13 @@ import bash from "highlight.js/lib/languages/bash";
 import nix from "highlight.js/lib/languages/nix";
 import shell from "highlight.js/lib/languages/shell";
 import sql from "highlight.js/lib/languages/sql";
+import yaml from "highlight.js/lib/languages/yaml";
 
 hljs.registerLanguage("bash", bash);
 hljs.registerLanguage("nix", nix);
 hljs.registerLanguage("shell", shell);
 hljs.registerLanguage("sql", sql);
+hljs.registerLanguage("yaml", yaml);
 
 const languageAliases = {
   sh: "bash",

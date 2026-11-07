@@ -78,13 +78,25 @@
         "open-source"
       ],
       "slug": "2026-09-04-support-open-source"
+    },
+    {
+      "title": "How to write good Home Assistant automations",
+      "date": "2026-11-07",
+      "summary": "Keeping control of your smart home",
+      "cover": "/posts/images/lamp-banner.webp",
+      "tags": [
+        "homelab",
+        "coding",
+        "open-source"
+      ],
+      "slug": "2026-11-07-how-to-write-good-homeassistant-automations"
     }
   ],
   "tagCounts": {
-    "coding": 4,
+    "coding": 5,
     "commentary": 1,
-    "homelab": 3,
+    "homelab": 4,
     "nix": 3,
-    "open-source": 5
+    "open-source": 6
   }
 }

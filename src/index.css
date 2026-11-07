@@ -130,6 +130,9 @@
   .prose h2 {
     @apply text-2xl font-semibold mt-8 mb-4 border-b border-gray-200 pb-1 scroll-mt-20;
   }
+  .prose h3 {
+    @apply text-xl font-semibold mt-6 mb-3 scroll-mt-20;
+  }
   .prose img {
     @apply w-full rounded-lg;
   }

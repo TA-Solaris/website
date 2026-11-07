@@ -289,7 +289,7 @@ export default function Post() {
       {html && (
         <article
           ref={articleRef}
-          className="prose prose-slate dark:prose-invert max-w-none space-y-4"
+          className="prose prose-slate dark:prose-invert max-w-none space-y-4 pb-12"
           onClick={handleArticleClick}
           dangerouslySetInnerHTML={{ __html: html }}
         />

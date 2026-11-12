@@ -90,13 +90,24 @@
         "open-source"
       ],
       "slug": "2026-11-07-how-to-write-good-homeassistant-automations"
+    },
+    {
+      "title": "Maintaining Orchis Reborn",
+      "date": "2026-11-12",
+      "summary": "Bringing Orchis to GNOME 51 with adaptive window colours and system accents",
+      "cover": "/posts/images/Orchis-Reborn.png",
+      "tags": [
+        "coding",
+        "open-source"
+      ],
+      "slug": "2026-11-12-maintaining-orchis-reborn"
     }
   ],
   "tagCounts": {
-    "coding": 5,
+    "coding": 6,
     "commentary": 1,
     "homelab": 4,
     "nix": 3,
-    "open-source": 6
+    "open-source": 7
   }
 }

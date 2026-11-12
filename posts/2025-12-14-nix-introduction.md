@@ -89,4 +89,4 @@ current state.
 If you are interested in getting started with Nix, I recommend the following:
 
 - [My Nix Dotfiles](https://github.com/TA-Solaris/dotfiles-nixos)
-- [My Previous Post about NVF](https://potter-ed.net/post/2025-11-08-nvf-introduction)
+- [My Previous Post about NVF](/post/2025-11-08-nvf-introduction)
